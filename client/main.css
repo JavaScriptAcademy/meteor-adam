@@ -1,0 +1,81 @@
+/* CSS declarations go here */
+.top-bar{
+	background-color: #FFFFFF;
+}
+#login-dropdown-list {
+	position: absolute;
+	top: 5px;
+	left: -145px;
+}
+
+#login-buttons .login-close-text {
+	float: right;
+	position: relative;
+	padding-bottom: 8px;
+	background-color: #FFFFFF;
+	height: 45px;
+	font-size: 11pt;
+}
+
+#back-to-login-link {
+	float: right;
+	background-color: white;
+}
+
+#login-buttons #signup-link {
+	float: right;
+	background-color: #FFFFFF;
+}
+
+#game-panel { 
+	position: relative; 
+	display: inline;
+	width: 500px;
+	max-width:500px;
+	min-width: 500px;
+	align-items: center
+}
+
+.game-panel-image{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+.game-start-button {
+	position: absolute; 
+	top: 40%; 
+	left: 45%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.alterlogin{
+	position: absolute; 
+	top: 50%; 
+	left: 45%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+a.rock-button{
+	position: absolute;
+	top: 457px;
+	left: 407px;
+}
+a.paper-button{
+	position: absolute;
+	top: 63px;
+	left: 630px;
+}
+a.scissors-button{
+	position: absolute;
+	top: 63px;
+	left: 173px;
+}
+
+
+

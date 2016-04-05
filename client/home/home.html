@@ -1,0 +1,117 @@
+<template name="home">
+
+	<nav class="top-bar" data-topbar>
+		<ul class="title-area">
+
+			<li class="name">
+				<h1>
+					<a href="#">
+						Rock Paper Scissors
+					</a>
+				</h1>
+			</li>
+			<li class="toggle-topbar menu-icon">
+				<a href="#"><span>menu</span></a>
+			</li>
+		</ul>
+		<section class="top-bar-section">
+			<ul class="right">
+				<li class="divider"></li>
+				<li class="login-sigin">
+					{{> loginButtons}}
+				</li>
+
+			</ul>
+
+		</section>
+	</nav>
+	
+	<div class="row">
+		<div class="large-12 columns">
+
+			<div class="row" >
+				<div class="large-12" id="game-panel">
+					<div style="position: relative">
+						<img class="game-panel-image" src="rock-paper-scissors.png" alt="slide image">
+						<button class="game-start-button">START</button>
+						<b class="alterlogin">{{alterlogin}}</b>
+						{{> game}}
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="large-12 columns">
+					<div class="row">
+
+						<div class="large-6 small-6 columns">
+							<h4>Upcoming Shows</h4><hr>
+							<div class="row">
+								<div class="large-1 column">
+									<img src="http://placehold.it/50x50&amp;text=[img]">
+								</div>
+								<div class="large-9 columns">
+									<h5><a href="#">Venue Name</a></h5>
+									<h6 class="subheader show-for-small">Doors at 00:00pm</h6>
+								</div>
+							</div><hr>
+							<div class="hide-for-small">
+								<div class="row">
+									<div class="large-1 column">
+										<img src="http://placehold.it/50x50&amp;text=[img]">
+									</div>
+									<div class="large-9 columns">
+										<h5 class="subheader"><a href="#">Venue Name</a></h5>
+									</div>
+								</div><hr>
+								<div class="row">
+									<div class="large-1 column">
+										<img src="http://placehold.it/50x50&amp;text=[img]">
+									</div>
+									<div class="large-9 columns">
+										<h5 class="subheader"><a href="#">Venue Name</a></h5>
+									</div>
+								</div><hr>
+								<div class="row">
+									<div class="large-1 column">
+										<img src="http://placehold.it/50x50&amp;text=[img]">
+									</div>
+									<div class="large-9 columns">
+										<h5 class="subheader"><a href="#">Venue Name</a></h5>
+									</div>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="large-6 small-6 columns">
+							<img src="http://placehold.it/600x665&amp;text=Image">
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+
+			<footer class="row">
+				<div class="large-12 columns"><hr>
+					<div class="row">
+						<div class="large-6 columns">
+							<p>&copy; Copyright no one at all. Go to town.</p>
+						</div>
+						<div class="large-6 small-12 columns">
+							<ul class="inline-list right">
+								<li><a href="#">Link 1</a></li>
+								<li><a href="#">Link 2</a></li>
+								<li><a href="#">Link 3</a></li>
+								<li><a href="#">Link 4</a></li>
+							</ul>
+						</div>
+					</div>
+				</div>
+			</footer>
+
+		</div>
+	</div>
+
+</template>

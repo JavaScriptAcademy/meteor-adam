@@ -5,81 +5,74 @@ import { Meteor } from 'meteor/meteor';
 import './home.html';
 import '../game/game.html'
 
+var lockedItem="";
+
 Template.home.onCreated(function bodyOnCreated() {
 	this.state = new ReactiveDict();
-	this.state.set("check","");
+	this.state.set("check"," ");
 	Meteor.subscribe('tasks');
 });
 
 Template.home.helpers({
+
 	tasks() {
 		const instance = Template.instance();
-		if (instance.state.get('hideCompleted')) {
-      // If hide completed is checked, filter tasks
-      return Tasks.find({ checked: { $ne: true } }, { sort: { createdAt: 1 } });
-  }
 
     // Show newest tasks at the top
     return Tasks.find({}, { sort: { createdAt: 1 } });
 },
 
-incompleteCount() {
-	return Tasks.find({ checked: { $ne: true } }).count();
-},
-
-alterlogin(){
+afterLogin(){
 	if(Meteor.user()!=null){
-		instance.state.set("check","");
+		Template.instance().state.set("check",null);
+	}else{
+		$(".game-start-button").html("START");
+		$(".game-start-button").attr('value', 'START');
 	}
 	return Template.instance().state.get("check");
 },
+
 });
 
 Template.home.events({
-	'submit .new-task'(event) {
-    // Prevent default browser form submit
-    event.preventDefault();
 
-    // Get value from form element
-    const target = event.target;
-    const text = target.text.value;
+	'click .game-start-button'(event, instance) {
 
-    // Insert a task into the collection
-    Tasks.insert({
-    	text,
-      createdAt: new Date(), // current time
-      owner: Meteor.userId(),
-      username: Meteor.user().username,
-  });
+		if($(".game-start-button").attr("value")=="LOCK"){
+			console.log("submit");
+			Meteor.call('tasks.insert', lockedItem);
+			lockedItem = "";
+			$(".game-start-button").html("LOCKED");
+			$(".game-start-button").attr('value', 'LOCKED');
 
-    // Insert a task into the collection
-    Meteor.call('tasks.insert', text);
 
-    // Clear form
-    target.text.value = '';
-},
+		}else if ($(".game-start-button").attr("value")!="LOCKED"){
+			if(Meteor.user()==null){
+				instance.state.set("check","Please login ...");
+			}else{
+				$(".game-start-button").html("LOCK");
+				$(".game-start-button").attr('value', 'LOCK');
+			}
+		}
 
-'click .game-start-button'(event, instance) {
 
-	if(Meteor.user()==null || Meteor.user().username ==""){
-		instance.state.set("check","Please login ...");
-	}else{
-		$(".game-start-button").fadeOut();
-	}
 
-},
+	},
 
-'click .rock-button'(event, instance) {
-	console.log("rock");
-},
+	'click .rock-button'(event, instance) {
+		console.log("rock");
+		lockedItem = "rock";
+	},
 
-'click .paper-button'(event, instance) {
-	console.log("paper");
-},
+	'click .paper-button'(event, instance) {
+		console.log("paper");
+		lockedItem = "paper";
+	},
 
-'click .scissors-button'(event, instance) {
-	console.log("scissors");
-},
+	'click .scissors-button'(event, instance) {
+		console.log("scissors");
+		lockedItem = "scissors";
+	},
 
 });
 

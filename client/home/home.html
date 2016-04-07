@@ -33,13 +33,21 @@
 				<div class="large-12" id="game-panel">
 					<div style="position: relative">
 						<img class="game-panel-image" src="rock-paper-scissors.png" alt="slide image">
+						<div class="row" >
+							<div class="large-4  large-offset-8 columns" >
+								<div class="ct-chart ct-golden-section" id="chart1"></div>
+							</div>
+						</div>>
 						<button class="game-start-button" value="START">START</button>
 						<b class="alterlogin">{{afterLogin}}</b>
+						<b class="time-countdown"></b>
 						{{#unless afterLogin}}
 						{{> game}}
 						{{/unless}}
 					</div>
 				</div>
+				
+				
 			</div>
 
 			<div class="row">
@@ -51,16 +59,14 @@
 							<div class="hide-for-small">
 								<ul>
 									{{#each tasks}}
-									<span class="text"><strong>{{username}}</strong> - {{text}}</span>
+									<li class="text"><strong>{{username}}</strong> - {{lockedItem}}</li>
 									{{/each}}
 								</ul>
 							</div>
 						</div>
 
 
-						<div class="large-6 small-6 columns">
-							<img src="http://placehold.it/600x665&amp;text=Image">
-						</div>
+						
 
 					</div>
 				</div>

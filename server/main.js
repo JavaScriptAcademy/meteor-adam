@@ -8,58 +8,60 @@ Meteor.startup(() => {
   // code to run on server at startup
 });
 
+
+
 Meteor.methods({
-	'tasks.insert'(text) {
-		check(text, String);
+	'tasks.insert'(lockedItem) {
+		check(lockedItem, String);
+ 		// Make sure the user is logged in before inserting a task
+ 		if (! Meteor.userId()) {
+ 			throw new Meteor.Error('not-authorized');
+ 		}
 
-    // Make sure the user is logged in before inserting a task
-    if (! Meteor.userId()) {
-    	throw new Meteor.Error('not-authorized');
-    }
-    Tasks.insert({
-    	text,
-    	createdAt: new Date(),
-    	owner: Meteor.userId(),
-    	username: Meteor.user().username,
-    },(err, result)=>{
-    	console.log(err);
-    	console.log(result);
-    });
-},
-'tasks.remove'(taskId) {
-	check(taskId, String);
+ 		var existuser = false;
+ 		var id= "";
 
-	const task = Tasks.findOne(taskId);
-	if (task.private && task.owner !== Meteor.userId()) {
-      // If the task is private, make sure only the owner can delete it
-      throw new Meteor.Error('not-authorized');
-  }
+ 		// console.log(Tasks.find({owner:Meteor.userId()}));
+ 		Tasks.find({username:Meteor.user().username}).forEach(
+ 			function(myDoc) { 
+ 				console.log( "user: " + myDoc._id );
+ 				existuser=true; 
+ 				id = myDoc._id;
+ 			});
+ 		if(existuser){
+ 			Tasks.update(id, { $set: { lockedItem: lockedItem } });
+ 		}else{
+ 			Tasks.insert({
+ 				lockedItem,
+ 				createdAt: new Date(),
+ 				owner: Meteor.userId(),
+ 				username: Meteor.user().username,
+ 			},(err, result)=>{
+ 				console.log(err);
+ 			});
+ 		}	
+ 	},
 
-  Tasks.remove(taskId);
-},
-'tasks.setChecked'(taskId, setChecked) {
-	check(taskId, String);
-	check(setChecked, Boolean);
+ 	'tasks.remove'(taskId) {
+ 		check(taskId, String);
 
-	const task = Tasks.findOne(taskId);
-	if (task.private && task.owner !== Meteor.userId()) {
-      // If the task is private, make sure only the owner can check it off
-      throw new Meteor.Error('not-authorized');
-  }
+ 		const task = Tasks.findOne(taskId);
+ 		if (task.private && task.owner !== Meteor.userId()) {
+      	// If the task is private, make sure only the owner can delete it
+      	throw new Meteor.Error('not-authorized');
+      }
 
-  Tasks.update(taskId, { $set: { checked: setChecked } });
-},
-'tasks.setPrivate'(taskId, setToPrivate) {
-	check(taskId, String);
-	check(setToPrivate, Boolean);
+      Tasks.remove(taskId);
+  },
 
-	const task = Tasks.findOne(taskId);
 
-    // Make sure only the task owner can make a task private
-    if (task.owner !== Meteor.userId()) {
-    	throw new Meteor.Error('not-authorized');
-    }
+  'tasks.update'(taskId, lockedItem) {
+  	check(taskId, String);
 
-    Tasks.update(taskId, { $set: { private: setToPrivate } });
-},
+  	const task = Tasks.findOne(taskId);
+
+  	Tasks.update(taskId, { $set: { text: lockedItem } });
+  },
+
 });
+

@@ -30,7 +30,9 @@ ejson@1.0.9
 email@1.0.10
 es5-shim@4.5.8
 fastclick@1.0.9
+fourseven:scss@3.4.1
 geojson-utils@1.0.6
+hilios:jquery.countdown@2.0.4
 hot-code-push@1.0.2
 html-tools@1.0.7
 htmljs@1.0.7
@@ -53,6 +55,7 @@ localstorage@1.0.7
 logging@1.0.10
 meteor@1.1.12
 meteor-base@1.0.2
+mfpierre:chartist-js@1.6.1
 minifier-css@1.1.9
 minifier-js@1.1.9
 minimongo@1.0.12

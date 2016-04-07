@@ -54,6 +54,21 @@
 	margin-right: auto;
 }
 
+#chart1{
+	position: absolute; 
+	top: -220px;
+
+}
+
+.ct-series-a .ct-slice-pie {
+	/* fill of the pie slieces */
+	fill: hsl(100, 40%, 60%);
+	/* give your pie slices some outline or separate them visually by using the background color here */
+	stroke: #B6A094;
+	/* outline width */
+	stroke-width: 4px;
+}
+
 .alterlogin{
 	position: absolute; 
 	top: 50%; 
@@ -61,6 +76,19 @@
 	display: block;
 	margin-left: auto;
 	margin-right: auto;
+	text-align: center;
+	width: 120px;
+}
+
+.time-countdown{
+	position: absolute; 
+	top: 50%; 
+	left: 45%;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	width: 120px;
 }
 
 a.rock-button{

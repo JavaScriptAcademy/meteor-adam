@@ -4,12 +4,14 @@ import { ReactiveDict } from 'meteor/reactive-dict';
 import { Meteor } from 'meteor/meteor';
 import './home.html';
 import '../game/game.html'
+import '../chart/chartpie.html'
 
 var lockedItem="";
 
 Template.home.onCreated(function bodyOnCreated() {
 	this.state = new ReactiveDict();
 	this.state.set("check"," ");
+	this.state.set("game-start",false);
 	Meteor.subscribe('tasks');
 });
 
@@ -32,16 +34,26 @@ Template.home.helpers({
     	}
     	return Template.instance().state.get("check");
     },
-    
-    scissorscount(){
-    	var num = 0;
 
-    	Tasks.find({lockedItem : "scissors"}).forEach(
-    		function(myDoc) { 
-    			num++;
-    		});
-    	return num;
+    gameStart(){
+    	return Template.instance().state.get("game-start");
     },
+
+    // refreshdata(){
+    // 	var data = {
+    // 		series: [scissorscount(), rockscount(), paperscount()]
+    // 	};
+
+    // 	var sum = function(a, b) { return a + b };
+
+    // 	var chart = new Chartist.Pie('.ct-chart', data, {
+    // 		labelInterpolationFnc: function(value) {
+    // 			return Math.round(value / data.series.reduce(sum) * 100) + '%';
+    // 		}
+    // 	});
+    // 	return chart;
+
+    // },
 
 });
 
@@ -63,52 +75,40 @@ Template.home.events({
 			}else{
 				$(".game-start-button").html("LOCK");
 				$(".game-start-button").attr('value', 'LOCK');
+				instance.state.set("game-start",true);
 				var oneMinue = new Date().getTime() + 6000;
 				$('.time-countdown').countdown(oneMinue, function(event) {
 					$(this).html(event.strftime('%M:%S'));
 				}).on('finish.countdown', function(event) {
 					$(this).html('Game end!');
-
+					instance.state.set("game-start",false);
+					
 				});;
 
-				 // Initialize a Line chart in the container with the ID chart1
 
-				 console.log(scissorscount());
-
-				 var data = {
-				 	series: [scissorscount(), rockscount(), paperscount()]
-				 };
-
-				 var sum = function(a, b) { return a + b };
-
-				 new Chartist.Pie('.ct-chart', data, {
-				 	labelInterpolationFnc: function(value) {
-				 		return Math.round(value / data.series.reduce(sum) * 100) + '%';
-				 	}
-				 });
-				}
 			}
+		}
 
 
 
-		},
+	},
 
-		'click .rock-button'(event, instance) {
-			console.log("rock");
-			lockedItem = "rock";
-		},
+	'click .rock-button'(event, instance) {
+		console.log("rock");
+		lockedItem = "rock";
+	},
 
-		'click .paper-button'(event, instance) {
-			console.log("paper");
-			lockedItem = "paper";
-		},
+	'click .paper-button'(event, instance) {
+		console.log("paper");
+		lockedItem = "paper";
+	},
 
-		'click .scissors-button'(event, instance) {
-			console.log("scissors");
-			lockedItem = "scissors";
-		},
+	'click .scissors-button'(event, instance) {
+		console.log("scissors");
+		lockedItem = "scissors";
+	},
 
-	});
+});
 
 var paperscount = function(){
 	var num = 0;

@@ -39,22 +39,6 @@ Template.home.helpers({
     	return Template.instance().state.get("game-start");
     },
 
-    // refreshdata(){
-    // 	var data = {
-    // 		series: [scissorscount(), rockscount(), paperscount()]
-    // 	};
-
-    // 	var sum = function(a, b) { return a + b };
-
-    // 	var chart = new Chartist.Pie('.ct-chart', data, {
-    // 		labelInterpolationFnc: function(value) {
-    // 			return Math.round(value / data.series.reduce(sum) * 100) + '%';
-    // 		}
-    // 	});
-    // 	return chart;
-
-    // },
-
 });
 
 Template.home.events({
@@ -64,7 +48,6 @@ Template.home.events({
 		if($(".game-start-button").attr("value")=="LOCK"){
 			console.log("submit");
 			Meteor.call('tasks.insert', lockedItem);
-			lockedItem = "";
 			$(".game-start-button").html("LOCKED");
 			$(".game-start-button").attr('value', 'LOCKED');
 
@@ -76,21 +59,17 @@ Template.home.events({
 				$(".game-start-button").html("LOCK");
 				$(".game-start-button").attr('value', 'LOCK');
 				instance.state.set("game-start",true);
-				var oneMinue = new Date().getTime() + 6000;
+				var oneMinue = new Date().getTime() + 10000;
 				$('.time-countdown').countdown(oneMinue, function(event) {
 					$(this).html(event.strftime('%M:%S'));
 				}).on('finish.countdown', function(event) {
 					$(this).html('Game end!');
-					instance.state.set("game-start",false);
-					
+					instance.state.set("game-start",false);	
+					// Meteor.call('tasks.insert', lockedItem);
+					gameAlgorithm(paperscount(), rockscount(), scissorscount());
 				});;
-
-
 			}
 		}
-
-
-
 	},
 
 	'click .rock-button'(event, instance) {
@@ -109,6 +88,15 @@ Template.home.events({
 	},
 
 });
+
+var gameAlgorithm = function(papers, rocks, scissors){
+	if(lockedItem == ""){
+		$('.time-countdown').html("You lost!");
+		Template.instance().state.set("result","lost");
+	}
+
+
+}
 
 var paperscount = function(){
 	var num = 0;
@@ -137,5 +125,6 @@ var scissorscount = function(){
 		});
 	return num;
 };
+
 
 

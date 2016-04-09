@@ -41,13 +41,9 @@ Tracker.autorun(function () {
 		return num;
 	};
 
-	// console.log("paperscount" + paperscount());
-	// console.log("rockscount" + rockscount());
-	// console.log("scissorscount" +scissorscount());
-
 	var data = {
 		series: [scissorscount(), rockscount(), paperscount()]
-		
+
 	};
 
 	var sum = function(a, b) { return a + b };
@@ -60,24 +56,6 @@ Tracker.autorun(function () {
 
 });
 
-// Template.chart.rendered = function(){
-// 	var data = {
-// 		series: [scissorscount(), rockscount(), paperscount()]
-// 		// series: [1, 2, 3]
-// 	};
-
-// 	var sum = function(a, b) { return a + b };
-// 	// new Chartist.Pie('.ct-chart', data, {labelInterpolationFnc: function(value) {
-// 	// 	return Math.round(value / data.series.reduce(sum) * 100) + '%';
-// 	// }}
-// 	// );
-
-// 	new Chartist.Pie('.ct-chart', data, {
-// 		labelInterpolationFnc: function(value) {
-// 			return Math.round(value / data.series.reduce(sum) * 100) + '%';
-// 		}
-// 	});
-// };
 
 
 

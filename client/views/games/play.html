@@ -1,0 +1,90 @@
+<template name="gamesPlay">
+
+    <div role="tabpanel" class="tab-pane active col col-xs-12 col-sm-12 game-panel pb20 pt20" id="game-panel">
+        <div class="col col-sm-12 text-center">
+            <h3 class="text-center mt0">{{ game.title }}</h3>
+
+            <hr/>
+
+            <div class="clearfix">
+                <div class="col col-xs-5 text-right">
+                    {{ game.playerOne.name }}
+                </div>
+                <div class="col col-xs-2 text-center">
+                    vs.
+                </div>
+                <div class="col col-xs-5 text-left">
+                    {{ game.playerTwo.name }}
+                </div>
+            </div>
+
+            <hr/>
+        </div>
+
+        {{#if game.is.completed }}
+
+        <div class="col col-sm-12 text-center">
+            {{#if game.is.completed }}
+            <p>
+                {{{ winnerName }}} 
+            </p>
+            {{/ if }}
+
+            <p>
+                Game finished
+                <a href="{{pathFor route='home'}}" title="Play more">Back</a>
+            </p>
+
+        </div>
+
+        {{ else }}
+
+        {{#if notEqualTo game.playerTwo.id "0" }}
+
+        {{#if game.is.playing }}
+
+        <div class="col col-sm-12 clearfix">
+            <div class="col col-xs-4 text-center">
+                <button href="#" class="button-game button-rock" selection="rock" title="Click to select Rock">
+                    <img src="/images/rock.png"/>
+                </button>
+
+                <p>ROCK</p>
+            </div>
+
+            <div class="col col-xs-4 text-center">
+                <button href="#" class="button-game button-paper" selection="paper" title="Click to select Paper">
+                    <img src="/images/paper.png"/>
+                </button>
+
+                <p>PAPER</p>
+            </div>
+
+            <div class="col col-xs-4 text-center">
+                <button href="#" class="button-game button-scissors" selection="scissors" title="Click to select Scissors">
+                    <img src="/images/scissors.png"/>
+                </button>
+
+                <p>SCISSORS</p>
+            </div>
+        </div>
+
+        {{ else }}
+        <div class="col col-sm-12 text-center">
+            <p class="text-center clearfix">
+                <button type="button" class="btn btn-success button-ready mt20" >START</button>
+            </p>
+        </div>
+        {{/ if }}
+
+        {{ else }}
+
+        {{/ if }}
+
+        {{/ if }}
+
+
+    </div>
+
+
+</template>

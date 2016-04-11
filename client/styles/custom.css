@@ -1,0 +1,31 @@
+
+body {
+    background-color: #f3f3f3;
+}
+
+#signup-link{
+    position: relative;
+    /*top:150px;*/
+}
+
+#forgot-password-link{
+    position: relative;
+}
+
+.accounts-dialog a {
+    position: absolute;
+    cursor: pointer;
+    text-decoration: underline;
+}
+
+#login-dropdown-list {
+    position: absolute;
+    top:10px;
+    left: -160px;
+}
+
+#login-buttons .login-close-text {
+    float: right;
+    position: relative;
+    padding-bottom: 8px;
+}

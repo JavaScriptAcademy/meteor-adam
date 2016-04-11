@@ -1,0 +1,29 @@
+<template name="gamesList">
+
+    <div role="tabpanel" class="tab-pane active col col-xs-12 col-sm-6" id="game-create">
+        {{#if lessThan gamesCount 5 }}{{/if }}
+
+        {{> gamesCreate }}
+    </div>
+
+    <div role="tabpanel" class="tab-pane col col-xs-12 col-sm-6" id="game-online">
+        <h3>Game Room</h3>
+
+        <div class="list-group list-group-games">
+            {{#if gamesCount }}
+            {{# each games }}
+            <a href="{{pathFor 'play' gameId=this._id}}" class="list-group-item" title="Click to play - {{ title }}">
+                <h4 class="list-group-item-heading">ROOM ID: {{ title }}</h4>
+                <P class="list-group-item-heading">OWNER: {{ createby }}</P>
+
+            </a>
+            {{/ each }}
+            {{ else }}
+            <div class="list-group-item gray">
+                <h4 class="list-group-item-heading">No room... </h4>
+            </div>
+            {{/if }}
+        </div>
+    </div>
+
+</template>

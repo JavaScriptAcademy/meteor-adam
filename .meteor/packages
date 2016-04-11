@@ -23,6 +23,6 @@ iron:router
 accounts-ui
 accounts-password
 check
-hilios:jquery.countdown
-mfpierre:chartist-js
+ian:accounts-ui-bootstrap-3
+twbs:bootstrap
 
